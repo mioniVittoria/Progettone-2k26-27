@@ -1,0 +1,65 @@
+1. Architettura dei Ruoli e Profilazione (Multi-Ruolo)
+Il requisito in cui una persona può ricoprire più ruoli contemporaneamente (es. il proprietario è anche istruttore e magari ha un cavallo in scuderia, oppure un istruttore è anche allievo) si risolve brillantemente evitando il classico campo fisso ruolo VARCHAR nella tabella utenti.
+
+La soluzione ideale (Tabella Associativa):
+
+Tabella Utente (ID, nome, cognome, email, password, telefono).
+
+Tabella Ruolo (ID, nome_ruolo: ProprietarioScuderia, ProprietarioPrivato, Istruttore, AllievoScuola).
+
+Tabella Ponte UtenteRuolo (id_utente, id_ruolo).
+
+Perché piace ai prof: In questo modo un singolo utente può avere N ruoli abilitati contemporaneamente. Al login, il sistema genera una dashboard dinamica o un selettore di ruolo ("In quale modalità vuoi accedere oggi?").
+
+2. Gestione delle Infrastrutture e Prenotazioni (Risorse Fisiche)
+Qui entriamo nel vivo della gestione delle risorse con vincoli di capienza e calcolo automatico:
+
+Box e Scuderia:
+
+Tabella Box (numero box, posizione, stato: occupato/libero).
+
+Tabella AssegnazioneBox (id_cavallo, id_box, data inizio, note alimentari/pasti, gestione movimento: giostra, corda, paddock).
+
+Il Tondino (Capienza = 1):
+
+Tabella PrenotazioneTondino (data, fascia oraria, id_utente, id_cavallo, stato: confermato). La query di controllo deve verificare che non esistano altre prenotazioni sovrapposte nello stesso orario (esclusione reciproca).
+
+I Campi (Esterno / Interno - Capienza Max = 5 slot simultanei):
+
+Tabella PrenotazioneCampo (campo, data_ora, id_utente, tipo: lezione_scuola / allenamento_privato).
+
+Logica di controllo: Quando un utente prenota, il sistema conta quanti record esistono per quel campo in quella fascia oraria: se il COUNT(*) è minore di 5 (e non c'è una lezione collettiva che occupa l'intera struttura), la prenotazione va a buon fine.
+
+I Paddock (Con calcolo consumi/costi):
+
+Tabella UtilizzoPaddock (id_paddock, id_cavallo, ora_inizio, ora_fine, costo_orario, totale_da_saldare).
+
+Logica: Quando il proprietario registra l'uscita dal paddock, il sistema calcola la differenza in ore/minuti (TIMEDIFF), la moltiplica per la tariffa oraria e aggiorna il conto in sospeso del cliente.
+
+3. Gestione Lezioni e Workflow Temporale
+Questa parte richiede una gestione accurata dei vincoli temporali (le "business rules"):
+
+Tabella Lezione / PrenotazioneLezione:
+
+Campi: id_lezione, data_ora, id_istruttore, id_cavallo (assegnato dall'istruttore), id_allievo, luogo (Campo 1, Campo 2, Tondino), stato (In attesa, Confermata dall'Istruttore, Disdetta).
+
+Le Regole di Scadenza (da implementare in PHP/Backend o tramite trigger/validazioni):
+
+Chiusura prenotazioni/disdette allievi: Il sistema controlla che DataCorrente <= DataLezione - 1 giorno. Se l'allievo prova a prenotare o disdire a meno di 24 ore, il sistema restituisce errore ("Termine ultimo superato").
+
+Convalida dell'istruttore: Gli istruttori hanno una schermata dedicata "Da Convalidare" in cui vedono le richieste pendenti e devono accettarle o rifiutarle tassativamente entro le ore 12:00 del giorno stesso della lezione.
+
+4. Gestione Sanitaria, Scadenze e Gare (Il Libretto del Cavallo)
+Per ogni singolo cavallo, il sistema diventa il fascicolo sanitario e sportivo digitale:
+
+Tabella InterventoSanitario / Scadenza:
+
+Campi: id_scadenza, id_cavallo, tipo (Maniscalco, Vermifugo, Vaccino, Dentista, Visita Medico-Sportiva), data_ultimo, intervallo_giorni_personalizzato (fondamentale perché ogni cavallo ha i suoi tempi di ferratura, es. ogni 35 o 45 giorni), data_prossima_scadenza, stato.
+
+Gestione Gare e Concorsi:
+
+Tabella Gara (titolo, data, luogo, organizzatore, scuderia).
+
+Tabella IscrizioneGara (id_gara, id_cavallo, id_allievo, stato_approvazione, check_passaporto (boolean), check_visita_agonistica (boolean), check_vaccini_validi (boolean)).
+
+Logica: L'istruttore fissa la gara sul calendario generale; gli allievi fanno richiesta di partecipazione collegando il proprio cavallo. Il sistema blocca l'iscrizione se i campi di controllo sanitario (es. vaccino antirabbica/influenza o visita medico-sportiva agonistica) risultano scaduti o non spuntati come "verificati" dal proprietario della scuderia.

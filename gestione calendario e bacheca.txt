@@ -1,0 +1,13 @@
+gestione calendario e bacheca 
+
+il gestore/proprietario della scuderia crea un profilo gestore e gli viene dato il docice di accesso per allievi, istruttori e proprietari diverso in base al ruolo così che l'allievo non possa segnarsi come istruttore se non lo è
+
+il gestore avrà la possibilità creare un maneggio "virtuale" con tutte le strutture per la gestione di esse e dei cavalli, avrà un calendario dove vedrà le scadenze mediche di tutti i cavalli e riceverà delle notifiche. sulla pagina principale ci sarà una bacheca dove potrà inserire eventi, lezioni ecc e che sarà visibile da tutti 
+
+il proprietario potrà gestire i suoi cavalli aggiungendo scadenze mediche, prenotando le strutture come il tondino o il campo e partecipare agli eventi della bacheca. il calendario manderà proomemoria anche delle scadenze mensili del pagamento e i rinnovi.
+
+l'istruttore potrà gestire le sue lezioni online associando ad ogni suo allievo un cavallo della scuola o programmare o disdire le lezioni.
+
+l'allievo potrà visualizzare gli eventi del maneggio iscriversi, verificare la sua partecipazione alle lezioni e vedere il cavallo assegnato, gestire il conto delle lezioni mensili tramite un calendario 
+
+ad ogni account potranno essere collegati più profili es: proprietario/allievo, istruttore/proprietario ecc

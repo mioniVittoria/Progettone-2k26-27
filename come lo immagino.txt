@@ -1,0 +1,21 @@
+come lo immagino : 
+la prima schermata per l'accesso che deve essere diverso tra:
+- il proprietario della scuderia: ha tutte le funzionalità per programmare lezioni, visite scadenze di pagamenti.. 
+- proprietari di cavalli privati: vedono le scadenze dei pagamenti che gli riguarda, le visite di/del loro cavalli/o con la possibilità di scriversi su un calendario per la - partecipazione ad una gara o una lezione e che poi verrà convalidata dall'istruttore/proprietario della scuderia
+- istruttori: che vedono le loro lezioni e la partecipazione degli allievi e scelgono gli abbinamenti cavallo-cavaliere per gli allievi della scuola
+- allievi scuola: che possono iscriversi alle lezioni e alle gare sotto approvazione dell'istruttore/proprietario della scuderia, vedere che cavallo monteranno e gestire i pagamenti delle loro lezioni. 
+
+strutture:
+si vedono le scuderie con la gestione dell assegnazione box-cavallo e le relative informazioni sui pasti, giri alla corda/movimento, giostra e altre cose
+l'utilizzo e la prenotazione per il tondino per girare i cavalli (lo vedono i proprietari dei cavalli, istruttori e proprietario scuderia)
+i campi (esterni e interni) per girare i cavalli o montare con la relativa prenotazione se non ci sono lezioni(ci sono più slot nello stesso momento) 
+paddok e prenotazione dell'utilizzo che poi ti segna per quanto tempo è stato ulilizzato e poi l'eventuale somma da saldare (lo vedono i proprietari dei cavalli e il proprietario della scuderia)
+
+gestione lezioni:
+calendario con i campi e l'eventuale tondino, vengono segnalate le lezini diponibili dagli istruttori e gli allievi privati/scuola si possono prenotare ci sono max 5 slot per lezione nei due campi e 1 nel tondino, gli istruttori devono accettare gli allievi entro la mattina del giorno stessoe gli allievi possono mandare richieste/disdire fino a max -1gg dalla lezione. 
+
+gestione eventi e gare per ogni cavallo:
+maniscalco (dipende da cavallo a cavallo quanti giorni) , vermifugo, vaccini, dentista, medicazioni eventuali e informazioni generali
+per le gare passaporto visita medicosportiva richiesta obbligatoria, vaccini obbligatori e registro dei pagamenti, le gare vengon fissate sul calendario dall'istruttore.
+
+mettere la possibilita da parte dell'proprietario della scuderia di essere contemporaneamente istruttore, istruttore al tempo stesso allievo/propietario di cavalli ecc

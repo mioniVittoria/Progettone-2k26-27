@@ -1,0 +1,40 @@
+per scuderia equinozio SCUDERIA-26211D codice univoco
+
+
+
+
+1. Titolo e Obiettivo del Progetto
+Nome: Gestionale per Centro Ippico e Scuderia
+Obiettivo: Digitalizzare l'intera gestione della scuderia: anagrafiche, pianificazione delle lezioni, iscrizioni agli eventi e monitoraggio delle scadenze sanitarie (maniscalco, vaccini, vermifughi, dentista) per garantire la salute e il benessere di ogni cavallo.
+
+2. Analisi dei Requisiti ed Entità (Schema Concettuale / ER)
+Il database si basa su 6 entità principali:
+CavalloInformazioni: Nome, razza, anno di nascita, numero di box assegnato.
+Ruolo: L'entità centrale della scuderia.
+Scadenza / Intervento Cavallo (Nuovo Modulo Calendario)
+Informazioni: Tipologia (Maniscalco, Vaccino, Vermifugo, Dentista, Visita Veterinaria), data ultimo intervento, data prossima scadenza, stato (In programma / Completato), note (es. tipo di ferratura o nome del farmaco).
+Relazione: Collegata 1-a-Molti con Cavallo (un cavallo ha molte scadenze nel tempo, ogni scadenza appartiene a un solo cavallo).
+Cliente / AllievoInformazioni: Nome, cognome, telefono, tipo di brevetto posseduto (ludico, A, B).
+Ruolo: Gli allievi che prendono lezioni o partecipano agli eventi.
+IstruttoreInformazioni: Nome, cognome, specializzazione.
+Ruolo: I tecnici che tengono le lezioni.
+Lezione (Agenda)Informazioni: Data e ora dell'appuntamento.
+Relazione: Collega 1 Cliente, 1 Cavallo e 1 Istruttore.
+Evento / IscrizioneEventoInformazioni: Titolo evento, data, costo, ed elenco dei clienti iscritti (per centri estivi, giornate a tema o feste in scuderia).
+
+3. Funzionalità Principali del Software
+Gestione Anagrafiche (CRUD): Inserimento, modifica e ricerca di cavalli, allievi e istruttori.
+Calendario Scadenze e Alert Sanitari (Nuovo):Visualizzazione mensile/settimanale degli interventi programmati.
+Bacheca Avvisi: Segnalazione automatica dei cavalli che hanno il maniscalco, il vaccino o il vermifugo in scadenza nei prossimi 15 giorni (o già scaduti).
+Libretto Sanitario Digitale: Storico di tutti gli interventi subiti da un singolo cavallo.
+Pianificazione Lezioni: Gestione dell'agenda giornaliera con controllo del carico di lavoro dei cavalli (evitando anche di assegnare un cavallo che ha una visita veterinaria o il maniscalco in quella fascia oraria).
+Gestione Eventi e Incassi: Iscrizione dei partecipanti agli eventi speciali e calcolo automatico del ricavato.
+
+4. Nuove Query Strategiche da Portare all'Esame
+Con l'aggiunta del calendario sanitario, puoi presentare query molto apprezzate perché simulano veri controlli gestionali:
+Controllo Scadenze Imminenti: Estrarre la lista di tutti i cavalli (con relativo numero di box) che hanno un intervento in scadenza entro i prossimi 15 giorni, ordinati per urgenza.
+Filtro per Tipologia: Visualizzare tutti i cavalli da sverminare o da ferrare in una determinata settimana per organizzare l'arrivo del veterinario o del maniscalco.
+Incrocio Agenda-Salute: Verificare che un cavallo non abbia interventi sanitari programmati nello stesso giorno in cui viene prenotato per una lezione.
+
+
+
